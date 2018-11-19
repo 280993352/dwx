@@ -1,0 +1,5 @@
+package com.dwx.p2p.base.controller;
+
+public class RegisterController {
+
+}

@@ -1,0 +1,13 @@
+package com.dwx.p2p.base.domain;
+
+  /*用户登录信息*/
+
+
+public class Loginfo {
+     
+	private Long id;
+	private String username;
+	private String password;
+	private int state;
+	
+}

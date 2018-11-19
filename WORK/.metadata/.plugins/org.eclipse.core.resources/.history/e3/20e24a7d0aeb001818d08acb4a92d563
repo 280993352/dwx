@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- 配置属性资源文件
+	<context:property-placeholder location="classpath:*.properties" system-properties-mode="NEVER"/>
+	 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:datasource.properties</value>
+				<value>classpath:m5c.properties</value>
+				<value>classpath:mail.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 自动扫描 -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.dwx.p2p" />
+
+	<!-- 配置连接池 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="url" value="${db.url}" />
+		<property name="driverClassName" value="${db.driver}" />
+	</bean>
+	
+	<!-- 配置连接池 -->
+	<!-- <bean id="dataSource2" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+		<property name="username" value="${datasource2.username}" />
+		<property name="password" value="${datasource2.password}" />
+		<property name="url" value="${datasource2.url}" />
+		<property name="maxActive" value="${datasource2.maxactive}" />
+	</bean> -->
+	
+	<!-- 配置连接池 -->
+	<<!-- bean id="dataSource" class="com.xmg.eloan.util.EloanRountingDataSource">
+		<property name="targetDataSources">
+			<map>
+				<entry key="ds1" value-ref="dataSource1" />
+				<entry key="ds2" value-ref="dataSource2" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="dataSource1" />
+	</bean> -->
+	
+	<!-- 配置mybatis sqlsessionfactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 配置数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:com/dwx/p2p/*/mapper/*Mapper.xml" />
+		<!-- 配置需要取类型别名的包名; -->
+		<property name="typeAliasesPackage" value="com.dwx.p2p.base.domain" />
+		<!-- mybatis框架特殊一些配置 -->
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+
+	<!-- 配置自动mapper映射 -->
+	<!-- <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.xmg.eloan.base.mapper;com.xmg.eloan.business.mapper" />
+	</bean> -->
+
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<tx:advice id="advice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="list*" read-only="true"/>
+			<tx:method name="query*" read-only="true"/>
+			<!-- <tx:method name="select*" read-only="true" /> -->
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* com.dwx.p2p..service.*Service.*(..))" id="pointCut"/>
+		<aop:advisor advice-ref="advice" pointcut-ref="pointCut"/>
+	</aop:config>
+
+</beans>

@@ -1,0 +1,21 @@
+package com.dwx.p2p.base.mapper;
+
+
+
+
+import java.awt.List;
+
+import com.dwx.p2p.base.domain.Logininfo;
+
+public interface LogininfoMapper {
+	
+	int insert(Logininfo record);
+
+	Logininfo selectByPrimaryKey(Long id);
+
+	List selectAll();
+
+	int updateByPrimaryKey(Logininfo record);
+
+	
+}

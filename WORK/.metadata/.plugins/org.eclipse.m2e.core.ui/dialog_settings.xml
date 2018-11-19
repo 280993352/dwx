@@ -36,9 +36,13 @@
 	</section>
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="D:\SSM\第01套 P2P互联网金融平台项目\其它p2p\二期项目\coree"/>
+			<item value="D:\SSM\第01套 P2P互联网金融平台项目\其它p2p\二期项目\core"/>
+			<item value="D:\SSM\第01套 P2P互联网金融平台项目\其它p2p\二期项目"/>
 			<item value="E:\test\website"/>
 		</list>
 		<list key="projectNameTemplate">
+			<item value="zzz"/>
 			<item value="[artifactId]"/>
 			<item value="[artifactId]-TRUNK"/>
 			<item value="[artifactId]-[version]"/>

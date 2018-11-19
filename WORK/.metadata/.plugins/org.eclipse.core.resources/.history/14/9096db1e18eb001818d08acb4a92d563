@@ -1,0 +1,16 @@
+package com.dwx.p2p.base.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.dwx.p2p.base.service.ILogininfoService;
+
+@Service
+public class LogininfoServiceImpl implements ILogininfoService {
+
+	@Override
+	public void register(String username, String password) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

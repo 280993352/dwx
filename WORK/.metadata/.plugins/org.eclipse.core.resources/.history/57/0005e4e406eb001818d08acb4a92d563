@@ -1,0 +1,11 @@
+datasource.username=root
+datasource.password=admin
+datasource.url=jdbc:mysql:///p2p
+datasource.maxactive=20
+datasource.alias=xmg_password
+
+
+datasource2.username=root
+datasource2.password=
+datasource2.url=jdbc:mysql://localhost:3307/p2p
+datasource2.maxactive=20

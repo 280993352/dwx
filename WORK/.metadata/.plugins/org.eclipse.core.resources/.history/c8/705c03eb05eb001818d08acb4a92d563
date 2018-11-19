@@ -1,0 +1,8 @@
+package snippet;
+
+public class Snippet {
+	public static void main(String[] args) {
+		db.url=jdbc:mysql://localhost:3306/p2p
+	}
+}
+

@@ -1,0 +1,10 @@
+package com.dwx.p2p.base.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class Base_Domain {
+   protected Long id;
+}

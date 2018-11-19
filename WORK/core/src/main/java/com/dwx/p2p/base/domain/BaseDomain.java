@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 abstract public class BaseDomain {
-    protected Long id;
+   protected Long id;
 }

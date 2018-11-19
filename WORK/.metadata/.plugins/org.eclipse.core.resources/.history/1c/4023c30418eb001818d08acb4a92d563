@@ -1,0 +1,13 @@
+package com.dwx.p2p.base.service.impl;
+
+import com.dwx.p2p.base.service.ILogininfoService;
+
+public class LogininfoServiceImpl implements ILogininfoService {
+
+	@Override
+	public void register(String username, String password) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

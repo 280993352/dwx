@@ -4,15 +4,30 @@ import lombok.Getter;
 import lombok.Setter;
 
 /*用户登录信息*/
-public class Logininfo extends BaseDomain {
-    public static final int STATE_NORMAL=0;//正常
-    public static final int STATE_LOCK=0;//锁定
-    @Setter
-    @Getter
+
+@Setter
+@Getter
+public class Logininfo extends BaseDomain{
+    
+	public static final int STATE_NORMAL = 0;//正常
+	public static final int STATE_LOCK = 1; //锁定
+	
 	private Long id;
 	private String username;
 	private String password;
-	/*锁定，封号*/
-	private int state; 
+	private int state;
+	public void setUsername(String username2) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setPassword(String encode) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setState(int stateNormal) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

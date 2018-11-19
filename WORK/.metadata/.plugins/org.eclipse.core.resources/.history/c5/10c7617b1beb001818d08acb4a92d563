@@ -1,0 +1,31 @@
+package com.dwx.p2p.base.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.dwx.p2p.base.domain.Logininfo;
+import com.dwx.p2p.base.mapper.LogininfoMapper;
+import com.dwx.p2p.base.service.ILogininfoService;
+import com.dwx.p2p.base.util.MD5;
+
+@Service
+public class LogininfoServiceImpl implements ILogininfoService {
+    @Autowired
+	private LogininfoMapper logininfoMapper;
+	@Override
+	public void register(String username, String password) {
+		// 判断用户是否存在
+		int count=this.logininfoMapper.getCountByUsername(uername);
+		//如果不存在，设值并保存这个对象'
+		if(count<=0) {
+			Logininfo li=new Logininfo();
+			li.setUsername(username);
+			li.setPassword(MD5.encode(password));
+			li.setState(Logininfo.STATE_NORMAL);
+			this.logininfoMapper.insert(li);
+		} else
+        // 如果存在，直接抛错误          
+			throw new RuntimeException("用户已经存在!"); 
+	}
+
+}
